@@ -23,8 +23,13 @@ if ingredients_list:
     for fruit_chosen in ingredients_list:
         ingredients_string+=fruit_chosen+''
 
-        search_on=pd_df.loc[pd_df['FRUIT_NAME'].str.strip()  == fruit_chosen.strip() , 'SEARCH_ON'].iloc[0]
-       
+        if not selected_row.empty:
+            search_on = selected_row['SEARCH_ON'].iloc[0]
+            st.write(f'The search value for {fruit_chosen} is {search_on}.')
+        else:
+        # Fallback if no match is found
+            search_on = fruit_chosen
+    
         st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
       
         st.subheader(fruit_chosen+'Nutrition Information')
